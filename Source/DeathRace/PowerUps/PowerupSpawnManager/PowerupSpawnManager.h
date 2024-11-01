@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "BasePowerUp.generated.h"
+#include "PowerupSpawnManager.generated.h"
 
 UCLASS()
-class DEATHRACE_API ABasePowerUp : public AActor
+class DEATHRACE_API APowerupSpawnManager : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABasePowerUp();
+	APowerupSpawnManager();
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,5 +22,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, Category = "Spawning", meta = (MakeEditWidget = "true"))
+	TArray<FVector> SpawnPoints;
+
+	//UPROPERTY(EditAnywhere, Category = "Spawning")
+	//TArray<UBasePowerups> Powerups;
 
 };
