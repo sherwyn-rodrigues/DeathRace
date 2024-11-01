@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "PowerupSpawnManager.generated.h"
 
+class USphereComponent;
+
 UCLASS()
 class DEATHRACE_API APowerupSpawnManager : public AActor
 {
@@ -19,14 +21,31 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
+	void OnPick();
+
+	UFUNCTION(BlueprintCallable)
+	void OnDrop();
+
+	UFUNCTION(BlueprintCallable)
+	void OnUse();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+<<<<<<< Updated upstream:Source/DeathRace/PowerUps/PowerupSpawnManager/PowerupSpawnManager.h
 	UPROPERTY(EditAnywhere, Category = "Spawning", meta = (MakeEditWidget = "true"))
 	TArray<FVector> SpawnPoints;
 
 	//UPROPERTY(EditAnywhere, Category = "Spawning")
 	//TArray<UBasePowerups> Powerups;
+=======
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere)
+	USphereComponent* SphereCollider;
+>>>>>>> Stashed changes:Source/DeathRace/PowerUps/BasePowerUp/BasePowerUp.h
 
 };
