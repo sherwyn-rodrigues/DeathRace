@@ -17,4 +17,13 @@ class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn
 public:
 
 	ADeathRaceSportsCar();
+
+	UPROPERTY(EditAnywhere)
+	USceneComponent* FrontSpawnPoint;
+
+	UPROPERTY(EditAnywhere)
+	USceneComponent* BackSpawnPoint;
+
+	UPROPERTY(EditAnywhere)
+	USceneComponent* MidSpawnPoint;
 };

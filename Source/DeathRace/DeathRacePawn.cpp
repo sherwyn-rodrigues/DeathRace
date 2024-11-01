@@ -15,6 +15,8 @@
 
 DEFINE_LOG_CATEGORY(LogTemplateVehicle);
 
+
+
 ADeathRacePawn::ADeathRacePawn()
 {
 	// construct the front camera boom
@@ -115,6 +117,22 @@ void ADeathRacePawn::Steering(const FInputActionValue& Value)
 	// add the input
 	ChaosVehicleMovement->SetSteeringInput(SteeringValue);
 }
+
+//AI steering
+void ADeathRacePawn::AISteering(float SteerAmount)
+{
+	// Steering for AI Car
+	ChaosVehicleMovement->SetSteeringInput(SteerAmount);
+}
+
+
+//AI Throtle
+void ADeathRacePawn::AIThrottle(float AccelerationAmount)
+{
+	// Throttle for AI Car
+	ChaosVehicleMovement->SetThrottleInput(AccelerationAmount);
+}
+
 
 void ADeathRacePawn::Throttle(const FInputActionValue& Value)
 {

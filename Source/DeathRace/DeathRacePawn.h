@@ -51,9 +51,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* SteeringAction;
 
+	/** Handles Steering Input For AI Cars */
+	void AISteering(float SteerAmount);
+
 	/** Throttle Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* ThrottleAction;
+
+	/** Handles Acceleration inpit for AI Cars */
+	void AIThrottle(float AccelerationAmount);
 
 	/** Brake Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
