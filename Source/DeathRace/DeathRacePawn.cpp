@@ -54,6 +54,9 @@ ADeathRacePawn::ADeathRacePawn()
 	// get the Chaos Wheeled movement component
 	ChaosVehicleMovement = CastChecked<UChaosWheeledVehicleMovementComponent>(GetVehicleMovement());
 
+	// add tag for collision checking done is BasePowerup
+	Tags.Add(FName("Car"));
+
 }
 
 void ADeathRacePawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)

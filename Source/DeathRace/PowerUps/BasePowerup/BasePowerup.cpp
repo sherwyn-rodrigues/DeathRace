@@ -1,12 +1,28 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "DeathRace/PowerUps/BasePowerup/BasePowerup.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 ABasePowerup::ABasePowerup()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// static mesh
+	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
+	RootComponent = StaticMesh;
+	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	StaticMesh->SetSimulatePhysics(false);
+
+	//sphere collider
+	SphereCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision"));
+	SphereCollider->SetupAttachment(StaticMesh);
+	SphereCollider->InitSphereRadius(100.0f);
+	SphereCollider->SetCollisionProfileName(TEXT("OverlapAllDynamic "));
+	SphereCollider->SetSimulatePhysics(true);
+	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ABasePowerup::OnOverlapBegin);
 
 }
 
@@ -17,6 +33,8 @@ void ABasePowerup::BeginPlay()
 	
 }
 
+
+
 // Called every frame
 void ABasePowerup::Tick(float DeltaTime)
 {
@@ -24,3 +42,31 @@ void ABasePowerup::Tick(float DeltaTime)
 
 }
 
+void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, 
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+	int32 OtherBodyIndex, bool bFromSweep, 
+	const FHitResult& SweepResult)
+{
+	if (OtherActor->ActorHasTag(FName("Car")))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Its a car"))
+			PowerupPick();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Its not a car"))
+
+	}
+}
+
+void ABasePowerup::PowerupPick()
+{
+}
+
+void ABasePowerup::OnPowerupDrop()
+{
+}
+
+void ABasePowerup::OnPowerupUSe()
+{
+}
