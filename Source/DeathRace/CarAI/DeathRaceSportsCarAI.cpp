@@ -11,8 +11,11 @@ ADeathRaceSportsCarAI::ADeathRaceSportsCarAI()
 	// Left and right points on car for checking steering direction
 	LeftPoint = CreateDefaultSubobject<USceneComponent>(TEXT("LeftPoint"));
 	LeftPoint->SetupAttachment(RootComponent);
+	LeftPoint->SetRelativeLocation(FVector(200.f, -100.f, 0.f));
+
 	RightPoint = CreateDefaultSubobject<USceneComponent>(TEXT("RightPoint"));
 	RightPoint->SetupAttachment(RootComponent);
+	RightPoint->SetRelativeLocation(FVector(200.f, 100.f, 0.f));
 }
 
 
