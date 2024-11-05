@@ -4,6 +4,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 
+//#include "GameFramework/Actor.h"
+//#include "Engine/World.h"
+
 // Sets default values
 ABasePowerup::ABasePowerup()
 {
@@ -19,9 +22,10 @@ ABasePowerup::ABasePowerup()
 	//sphere collider
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision"));
 	SphereCollider->SetupAttachment(StaticMesh);
-	SphereCollider->InitSphereRadius(100.0f);
+	SphereCollider->InitSphereRadius(60.0f);
 	SphereCollider->SetCollisionProfileName(TEXT("OverlapAllDynamic "));
-	SphereCollider->SetSimulatePhysics(true);
+	SphereCollider->SetSimulatePhysics(false);
+	SphereCollider->SetRelativeLocation(FVector(0.f, 0.f, 50.f));
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ABasePowerup::OnOverlapBegin);
 
 }
@@ -32,8 +36,6 @@ void ABasePowerup::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
-
 
 // Called every frame
 void ABasePowerup::Tick(float DeltaTime)
@@ -49,24 +51,38 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 {
 	if (OtherActor->ActorHasTag(FName("Car")))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Its a car"))
-			PowerupPick();
+		UE_LOG(LogTemp, Warning, TEXT("Its a car"));
+		PowerupPick(OtherActor);
+
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Its not a car"))
+		UE_LOG(LogTemp, Warning, TEXT("Its not a car"));
 
 	}
 }
 
-void ABasePowerup::PowerupPick()
+
+//Powerup pick function
+void ABasePowerup::PowerupPick(AActor* OtherActor)
 {
+	FAttachmentTransformRules AttachmentRules(
+	EAttachmentRule::SnapToTarget,
+	EAttachmentRule::KeepRelative,
+	EAttachmentRule::KeepRelative,
+	true
+	);
+
+	AttachToActor(OtherActor, AttachmentRules);
+	SphereCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	this->SetActorHiddenInGame(true);
 }
+
 
 void ABasePowerup::OnPowerupDrop()
 {
 }
 
-void ABasePowerup::OnPowerupUSe()
+void ABasePowerup::OnPowerupUse()
 {
 }

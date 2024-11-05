@@ -23,13 +23,13 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	void PowerupPick();
+	void PowerupPick(AActor* OtherActor);
 
 	UFUNCTION()
 	void OnPowerupDrop();
 
 	UFUNCTION()
-	void OnPowerupUSe();
+	void OnPowerupUse();
 
 
 
