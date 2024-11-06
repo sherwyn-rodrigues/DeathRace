@@ -53,12 +53,10 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Its a car"));
 		PowerupPick(OtherActor);
-
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Its not a car"));
-
 	}
 }
 

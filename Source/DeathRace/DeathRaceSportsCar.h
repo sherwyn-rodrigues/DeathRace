@@ -18,12 +18,19 @@ public:
 
 	ADeathRaceSportsCar();
 
+	/** Front powerup attack point */
 	UPROPERTY(EditAnywhere)
 	USceneComponent* FrontSpawnPoint;
 
+	/** Rear powerup attack point */
 	UPROPERTY(EditAnywhere)
 	USceneComponent* BackSpawnPoint;
 
+	/** Midpoint powerup attack point */
 	UPROPERTY(EditAnywhere)
 	USceneComponent* MidSpawnPoint;
+
+	/** Max Health of the vehicles */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxHeath = 100;
 };
