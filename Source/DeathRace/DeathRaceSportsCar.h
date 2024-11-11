@@ -32,5 +32,5 @@ public:
 
 	/** Max Health of the vehicles */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxHeath = 100;
+	float MaxHealth = 100;
 };

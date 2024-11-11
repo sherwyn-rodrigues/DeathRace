@@ -17,3 +17,11 @@ void UDeathRaceUI::UpdateGear(int32 NewGear)
 	// call the Blueprint handler
 	OnGearUpdate(NewGear);
 }
+
+void UDeathRaceUI::UpdateHealth(float HealthToAdd)
+{
+	OnHealthUpdate();
+}
+
+
+
