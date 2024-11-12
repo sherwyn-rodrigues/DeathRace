@@ -112,6 +112,20 @@ void ADeathRacePawn::Tick(float Delta)
 	BackSpringArm->SetRelativeRotation(FRotator(0.0f, CameraYaw, 0.0f));
 }
 
+void ADeathRacePawn::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentHealth = MaxHealth;
+}
+
+void ADeathRacePawn::ChangeHealth(float HealthUpdateValue)
+{
+	if (CurrentHealth + HealthUpdateValue < MaxHealth && CurrentHealth + HealthUpdateValue > 0)
+	{
+		CurrentHealth = +HealthUpdateValue;
+	}
+}
+
 void ADeathRacePawn::Steering(const FInputActionValue& Value)
 {
 	// get the input magnitude for steering

@@ -14,6 +14,9 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateVehicle, Log, All);
 
+//declare deligate
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChange, float, HealthUpdate);
+
 /**
  *  Vehicle Pawn class
  *  Handles common functionality for all vehicle types,
@@ -97,7 +100,21 @@ public:
 
 	virtual void Tick(float Delta) override;
 
+	virtual void BeginPlay() override;
+
 	// End Actor interface
+
+	/** Max Health of the vehicles */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxHealth = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float CurrentHealth;
+
+	//FOnHealthChange OnHealthChanged;
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeHealth(float HealthUpdateValue);
 
 protected:
 

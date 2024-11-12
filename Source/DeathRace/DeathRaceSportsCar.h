@@ -30,7 +30,4 @@ public:
 	UPROPERTY(EditAnywhere)
 	USceneComponent* MidSpawnPoint;
 
-	/** Max Health of the vehicles */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float MaxHealth = 100;
 };
