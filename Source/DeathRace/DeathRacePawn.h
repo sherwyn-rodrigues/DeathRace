@@ -109,9 +109,11 @@ public:
 	float MaxHealth = 100;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float CurrentHealth;
+	float CurrentHealth = 0;
 
-	//FOnHealthChange OnHealthChanged;
+	//Multicast deligate instance
+	UPROPERTY(BlueprintAssignable)
+	FOnHealthChange OnHealthChanged;
 
 	UFUNCTION(BlueprintCallable)
 	void ChangeHealth(float HealthUpdateValue);

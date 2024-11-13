@@ -115,7 +115,7 @@ void ADeathRacePawn::Tick(float Delta)
 void ADeathRacePawn::BeginPlay()
 {
 	Super::BeginPlay();
-	CurrentHealth = MaxHealth;
+	ChangeHealth(MaxHealth);
 }
 
 void ADeathRacePawn::ChangeHealth(float HealthUpdateValue)
@@ -123,6 +123,8 @@ void ADeathRacePawn::ChangeHealth(float HealthUpdateValue)
 	if (CurrentHealth + HealthUpdateValue < MaxHealth && CurrentHealth + HealthUpdateValue > 0)
 	{
 		CurrentHealth = +HealthUpdateValue;
+		UE_LOG(LogTemp, Warning, TEXT("%f"), CurrentHealth);
+		OnHealthChanged.Broadcast(CurrentHealth);
 	}
 }
 
