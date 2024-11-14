@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DeathRace/PowerUps/BasePowerup/BasePowerup.h"
 #include "Structures.generated.h"
 
 USTRUCT(BlueprintType)
@@ -10,8 +11,6 @@ struct DEATHRACE_API FPowerupStructures : public FTableRowBase
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int id;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName PowerupName;
@@ -24,4 +23,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bIsSpawnableAtSpawnPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<ABasePowerup> ClassReference;
 };

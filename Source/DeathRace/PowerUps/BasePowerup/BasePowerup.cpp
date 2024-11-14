@@ -25,7 +25,6 @@ ABasePowerup::ABasePowerup()
 	SphereCollider->InitSphereRadius(60.0f);
 	SphereCollider->SetCollisionProfileName(TEXT("OverlapAllDynamic "));
 	SphereCollider->SetSimulatePhysics(false);
-	SphereCollider->SetRelativeLocation(FVector(0.f, 0.f, 50.f));
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ABasePowerup::OnOverlapBegin);
 
 }
