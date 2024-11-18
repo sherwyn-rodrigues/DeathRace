@@ -23,10 +23,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category = "Spawning", meta = (MakeEditWidget = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawning", meta = (MakeEditWidget = "true"))
 	TArray<FVector> SpawnPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawning")
+	UDataTable* PowerupsDataTable;
 
 	//UPROPERTY(EditAnywhere, Category = "Spawning")
 	//TArray<UBasePowerups> Powerups;
+
+	UFUNCTION(BlueprintCallable)
+	void SpawnPowerupsAtLocation();
 
 };
