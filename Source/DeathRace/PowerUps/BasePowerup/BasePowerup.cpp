@@ -71,6 +71,7 @@ void ABasePowerup::PowerupPick(AActor* OtherActor)
 	);
 
 	AttachToActor(OtherActor, AttachmentRules);
+	SetOwner(OtherActor);
 	SphereCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	this->SetActorHiddenInGame(true);
 }
