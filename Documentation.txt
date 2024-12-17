@@ -42,3 +42,4 @@ Powerups
 
 HealthDisplayed done
 Spawn Powerups and create data assest for powerups
+add pwoerUp on hud
