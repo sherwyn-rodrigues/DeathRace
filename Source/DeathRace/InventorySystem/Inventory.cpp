@@ -48,6 +48,10 @@ bool UInventory::CheckIsInventoryFull()
 	for (int32 index : InventoryKeys)
 	{
 		ABasePowerup** FoundObjectPtr = InventroyItems.Find(index);
+
 	}
+	return true;
+
 }
+
 

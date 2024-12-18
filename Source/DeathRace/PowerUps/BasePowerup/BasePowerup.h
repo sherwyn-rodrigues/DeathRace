@@ -42,6 +42,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	USphereComponent* SphereCollider;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FDataTableRowHandle RowName;
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
