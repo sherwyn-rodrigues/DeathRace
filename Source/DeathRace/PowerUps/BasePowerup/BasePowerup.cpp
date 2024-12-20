@@ -3,6 +3,7 @@
 #include "DeathRace/PowerUps/BasePowerup/BasePowerup.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
+#include "DeathRace/Interfaces/InventoryInterface.h"
 
 //#include "GameFramework/Actor.h"
 //#include "Engine/World.h"
@@ -52,13 +53,16 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Its a car"));
 		PowerupPick(OtherActor);
+		if (OtherActor->Implements<UInventoryInterface>())
+		{
+			IInventoryInterface::Execute_AddPowerup(OtherActor, this);
+		}
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Its not a car"));
 	}
 }
-
 
 //Powerup pick function
 void ABasePowerup::PowerupPick(AActor* OtherActor)
@@ -70,10 +74,10 @@ void ABasePowerup::PowerupPick(AActor* OtherActor)
 	true
 	);
 
-	AttachToActor(OtherActor, AttachmentRules);
-	SetOwner(OtherActor);
 	SphereCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	this->SetActorHiddenInGame(true);
+	AttachToActor(OtherActor, AttachmentRules);
+	SetOwner(OtherActor);
 }
 
 

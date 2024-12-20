@@ -4,13 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "DeathRacePawn.h"
+#include "DeathRace/Interfaces/InventoryInterface.h"
+#include "DeathRace/InventorySystem/Inventory.h"
 #include "DeathRaceSportsCar.generated.h"
 
 /**
  *  Sports car wheeled vehicle implementation
  */
 UCLASS(abstract)
-class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn
+class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn, public IInventoryInterface
 {
 	GENERATED_BODY()
 	
@@ -29,5 +31,12 @@ public:
 	/** Midpoint powerup attack point */
 	UPROPERTY(EditAnywhere)
 	USceneComponent* MidSpawnPoint;
+
+	/** Inventory System component */
+	UPROPERTY(EditAnywhere)
+	UInventory* Inventory;
+
+	// Inventory Function override
+	void AddPowerup_Implementation(ABasePowerup* Powerup) override;
 
 };

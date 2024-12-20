@@ -18,7 +18,11 @@ public:
 	UInventory();
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	TMap<int32, ABasePowerup*> InventroyItems;
+	TMap<int32, ABasePowerup*> InventoryItems = {
+		{1,nullptr},
+		{2,nullptr},
+		{3,nullptr}
+	};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 CurrentIndex = 2;
@@ -35,12 +39,15 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	UFUNCTION(BlueprintCallable)
-	void AddPowerupToInventory(int32 AddIndex);
+	void AddPowerupToInventory(ABasePowerup* PowerupClass);
 
 	UFUNCTION(BlueprintCallable)
 	void RemovePowerupFromInventory(int32 RemoveIndex);
 
 	UFUNCTION(BlueprintCallable)
 	bool CheckIsInventoryFull();
+
+	UFUNCTION(BlueprintCallable)
+	void DisplayInventory();
 		
 };

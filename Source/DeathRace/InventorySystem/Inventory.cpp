@@ -32,26 +32,81 @@ void UInventory::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 	// ...
 }
 
-void UInventory::AddPowerupToInventory(int32 AddIndex)
+void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 {
+	TArray<int32> InventoryKeys;
+	InventoryItems.GetKeys(InventoryKeys);
+
+	if (!CheckIsInventoryFull() && PowerupClass)// check if inventory is not full
+	{
+		if (*InventoryItems.Find(2) == nullptr)// add to the middle index of the map
+		{
+			InventoryItems.Add(2, PowerupClass);
+			DisplayInventory();
+			return;
+		}
+
+		if (*InventoryItems.Find(3) == nullptr)// add to the right index of the map
+		{
+			InventoryItems.Add(3, PowerupClass);
+			DisplayInventory();
+			return;
+		}
+
+		if (*InventoryItems.Find(1) == nullptr)// add to the left index of the map
+		{
+			InventoryItems.Add(1, PowerupClass);
+			DisplayInventory();
+			return;
+		}
+
+		DisplayInventory();
+
+	}
+	
 }
 
 void UInventory::RemovePowerupFromInventory(int32 RemoveIndex)
 {
+	InventoryItems.Add(RemoveIndex);
 }
 
 bool UInventory::CheckIsInventoryFull()
 {
 	TArray<int32> InventoryKeys;
-	InventroyItems.GetKeys(InventoryKeys);
+	InventoryItems.GetKeys(InventoryKeys);
 
 	for (int32 index : InventoryKeys)
 	{
-		ABasePowerup** FoundObjectPtr = InventroyItems.Find(index);
-
+		ABasePowerup** FoundObjectPtr = InventoryItems.Find(index);
+		if (*FoundObjectPtr == nullptr)
+		{
+			return false;
+		}
 	}
 	return true;
+}
 
+void UInventory::DisplayInventory()
+{
+	TArray<int32> InventoryKeys;
+	InventoryItems.GetKeys(InventoryKeys);
+
+	for (int32 index : InventoryKeys)
+	{
+		ABasePowerup** FoundObjectPtr = InventoryItems.Find(index);
+		ABasePowerup* base = *FoundObjectPtr;
+		if (base != nullptr)
+		{
+			FString RowNameString = base->RowName.RowName.ToString();
+			UE_LOG(LogTemp, Warning, TEXT("Inventory: %s"), *RowNameString);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Inventory: null"));
+		}
+
+	}
 }
 
 

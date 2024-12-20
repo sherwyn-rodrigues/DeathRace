@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "InventoryInterface.generated.h"
+#include "TEstinterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI, Blueprintable)
-class UInventoryInterface : public UInterface
+UINTERFACE(MinimalAPI)
+class UTEstinterface : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,13 +16,10 @@ class UInventoryInterface : public UInterface
 /**
  * 
  */
-class DEATHRACE_API IInventoryInterface
+class DEATHRACE_API ITEstinterface
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void AddPowerup(ABasePowerup* Powerup);
 };

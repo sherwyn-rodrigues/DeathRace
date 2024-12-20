@@ -79,4 +79,14 @@ ADeathRaceSportsCar::ADeathRaceSportsCar()
 	MidSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Mid SpawnPoint"));
 	MidSpawnPoint->SetupAttachment(RootComponent);
 	MidSpawnPoint->SetRelativeLocation(FVector(0.f, 0.f, 60.f));
+
+	// setup inventory system 
+	Inventory = CreateDefaultSubobject<UInventory>(TEXT("Inventory System"));
+}
+
+void ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Powerup implimentation"));
+	Inventory->AddPowerupToInventory(Powerup);
+
 }
