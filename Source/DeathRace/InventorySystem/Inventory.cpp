@@ -37,24 +37,23 @@ void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 		if (*InventoryItems.Find(2) == nullptr)// add to the middle index of the map
 		{
 			InventoryItems.Add(2, PowerupClass);
-			DisplayInventory();
+			//DisplayInventory();
 			return;
 		}
 
 		if (*InventoryItems.Find(3) == nullptr)// add to the right index of the map
 		{
 			InventoryItems.Add(3, PowerupClass);
-			DisplayInventory();
+			//DisplayInventory();
 			return;
 		}
 
 		if (*InventoryItems.Find(1) == nullptr)// add to the left index of the map
 		{
 			InventoryItems.Add(1, PowerupClass);
-			DisplayInventory();
+			//DisplayInventory();
 			return;
 		}
-		DisplayInventory();
 	}
 }
 

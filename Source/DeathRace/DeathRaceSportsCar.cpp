@@ -98,6 +98,7 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 	if (powerup != nullptr)
 	{
 		powerup->OnPowerupUse();
+		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
 	}
 }
 
