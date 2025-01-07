@@ -39,4 +39,21 @@ public:
 	// Inventory Function override
 	void AddPowerup_Implementation(ABasePowerup* Powerup) override;
 
+	//Remove from inventory after use
+	void UseAndRemovePowerup();
+
+	//Drop powerup from inventory
+	void DropPowerupFromInventory();
+
+	//seting up input
+	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+
+
+
+protected:
+
+	/** Steering Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* UsePowerupAction;
+
 };

@@ -29,6 +29,7 @@ void UInventory::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 	// ...
 }
 
+
 void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 {
 	if (!CheckIsInventoryFull() && PowerupClass)// check if inventory is not full
@@ -62,6 +63,7 @@ void UInventory::RemovePowerupFromInventory(int32 RemoveIndex)
 	InventoryItems.Add(RemoveIndex);
 }
 
+
 bool UInventory::CheckIsInventoryFull()
 {
 	InventoryItems.GetKeys(InventoryKeys);
@@ -76,6 +78,7 @@ bool UInventory::CheckIsInventoryFull()
 	}
 	return true;
 }
+
 
 void UInventory::DisplayInventory()
 {
@@ -93,6 +96,15 @@ void UInventory::DisplayInventory()
 			UE_LOG(LogTemp, Warning, TEXT("Inventory: null"));
 		}
 	}
+}
+
+ABasePowerup* UInventory::GetPowerupFromInventory(int PowerupIndex) const
+{
+	if (InventoryItems.Contains(PowerupIndex))
+	{
+		return *(InventoryItems.Find(PowerupIndex));
+	}
+	return nullptr;
 }
 
 

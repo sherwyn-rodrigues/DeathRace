@@ -4,6 +4,8 @@
 #include "DeathRaceSportsCar.h"
 #include "DeathRaceSportsWheelFront.h"
 #include "DeathRaceSportsWheelRear.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "ChaosWheeledVehicleMovementComponent.h"
 
 ADeathRaceSportsCar::ADeathRaceSportsCar()
@@ -88,4 +90,37 @@ void ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
 {
 	//Add Picked Powerup To Inventory
 	Inventory->AddPowerupToInventory(Powerup);
+}
+
+void ADeathRaceSportsCar::UseAndRemovePowerup()
+{
+	ABasePowerup* powerup = Inventory->GetPowerupFromInventory(Inventory->CurrentIndex);
+	if (powerup != nullptr)
+	{
+		powerup->OnPowerupUse();
+	}
+}
+
+void ADeathRaceSportsCar::DropPowerupFromInventory()
+{
+}
+
+
+
+//seting up input for use and switch of powerups
+
+void ADeathRaceSportsCar::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		// Use Powerup
+		EnhancedInputComponent->BindAction(UsePowerupAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::UseAndRemovePowerup);
+		UE_LOG(LogTemplateVehicle, Error, TEXT("Works man"));
+	}
+	else
+	{
+		UE_LOG(LogTemplateVehicle, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+	}
 }
