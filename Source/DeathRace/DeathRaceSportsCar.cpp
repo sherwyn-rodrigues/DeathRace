@@ -86,7 +86,6 @@ ADeathRaceSportsCar::ADeathRaceSportsCar()
 
 void ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Powerup implimentation"));
+	//Add Picked Powerup To Inventory
 	Inventory->AddPowerupToInventory(Powerup);
-
 }

@@ -33,7 +33,7 @@ public:
 	USceneComponent* MidSpawnPoint;
 
 	/** Inventory System component */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UInventory* Inventory;
 
 	// Inventory Function override

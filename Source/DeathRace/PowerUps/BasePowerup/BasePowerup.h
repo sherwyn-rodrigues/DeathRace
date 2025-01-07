@@ -27,7 +27,7 @@ protected:
 	UFUNCTION()
 	void OnPowerupDrop();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void OnPowerupUse();
 
 

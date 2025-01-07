@@ -42,6 +42,9 @@ Powerups
 
 HealthDisplayed done
 Spawn Powerups and create data assest for powerups
-add pwoerUp on hud
-
 base implimentation of inventory system is done 
+
+Display pwoerUps on hud
+research about whether to store object reference or class reference in the inventory
+( yes you need object reference. Its better because you have to keep track of the properties of these objects
+and its possible only through object refarence)

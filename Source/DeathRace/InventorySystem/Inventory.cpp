@@ -8,9 +8,9 @@ UInventory::UInventory()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
+	PrimaryComponentTick.bCanEverTick = false;
 	// ...
+	InventoryItems.GetKeys(InventoryKeys);
 }
 
 
@@ -18,9 +18,7 @@ UInventory::UInventory()
 void UInventory::BeginPlay()
 {
 	Super::BeginPlay();
-
 	// ...
-	
 }
 
 
@@ -28,15 +26,11 @@ void UInventory::BeginPlay()
 void UInventory::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 	// ...
 }
 
 void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 {
-	TArray<int32> InventoryKeys;
-	InventoryItems.GetKeys(InventoryKeys);
-
 	if (!CheckIsInventoryFull() && PowerupClass)// check if inventory is not full
 	{
 		if (*InventoryItems.Find(2) == nullptr)// add to the middle index of the map
@@ -59,11 +53,8 @@ void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 			DisplayInventory();
 			return;
 		}
-
 		DisplayInventory();
-
 	}
-	
 }
 
 void UInventory::RemovePowerupFromInventory(int32 RemoveIndex)
@@ -73,7 +64,6 @@ void UInventory::RemovePowerupFromInventory(int32 RemoveIndex)
 
 bool UInventory::CheckIsInventoryFull()
 {
-	TArray<int32> InventoryKeys;
 	InventoryItems.GetKeys(InventoryKeys);
 
 	for (int32 index : InventoryKeys)
@@ -89,9 +79,6 @@ bool UInventory::CheckIsInventoryFull()
 
 void UInventory::DisplayInventory()
 {
-	TArray<int32> InventoryKeys;
-	InventoryItems.GetKeys(InventoryKeys);
-
 	for (int32 index : InventoryKeys)
 	{
 		ABasePowerup** FoundObjectPtr = InventoryItems.Find(index);
@@ -105,7 +92,6 @@ void UInventory::DisplayInventory()
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Inventory: null"));
 		}
-
 	}
 }
 

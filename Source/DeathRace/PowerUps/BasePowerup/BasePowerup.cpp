@@ -4,6 +4,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
 #include "DeathRace/Interfaces/InventoryInterface.h"
+#include "Engine/World.h"
 
 //#include "GameFramework/Actor.h"
 //#include "Engine/World.h"
@@ -83,8 +84,10 @@ void ABasePowerup::PowerupPick(AActor* OtherActor)
 
 void ABasePowerup::OnPowerupDrop()
 {
+	
 }
 
 void ABasePowerup::OnPowerupUse()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Power Being Used"));
 }

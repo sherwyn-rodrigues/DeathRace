@@ -30,7 +30,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool IsInventoryFull = false;
 
-protected:
+protected: 
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
@@ -49,5 +49,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DisplayInventory();
+
+	// array to store the inventory keys
+	TArray<int32> InventoryKeys;
 		
 };
