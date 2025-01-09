@@ -107,6 +107,34 @@ void ADeathRaceSportsCar::DropPowerupFromInventory()
 }
 
 
+void ADeathRaceSportsCar::SwitchInventoryNextIndex()
+{
+	SwitchInventoryIndex(true);
+}
+
+void ADeathRaceSportsCar::SwitchInventoryPreviousIndex()
+{
+	SwitchInventoryIndex(false);
+}
+
+void ADeathRaceSportsCar::SwitchInventoryIndex(bool isFoward)
+{
+	if (isFoward)
+	{
+		if (Inventory->CurrentIndex++ < 4)
+		{
+			Inventory->CurrentIndex = Inventory->CurrentIndex ++;
+		}
+	}
+	else
+	{
+		if (Inventory->CurrentIndex-- > 0)
+		{
+			Inventory->CurrentIndex = Inventory->CurrentIndex--;
+		}
+	}
+}
+
 
 //seting up input for use and switch of powerups
 
@@ -118,10 +146,19 @@ void ADeathRaceSportsCar::SetupPlayerInputComponent(class UInputComponent* Playe
 	{
 		// Use Powerup
 		EnhancedInputComponent->BindAction(UsePowerupAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::UseAndRemovePowerup);
-		UE_LOG(LogTemplateVehicle, Error, TEXT("Works man"));
+
+		//Drop Powerup
+		EnhancedInputComponent->BindAction(DropPowerAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::DropPowerupFromInventory);
+
+		//SwitchNextPowerup
+		EnhancedInputComponent->BindAction(SwitchNextPowerupAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::SwitchInventoryNextIndex);
+
+		//SwitchPreviousPowerup
+		EnhancedInputComponent->BindAction(SwitchPreviousPowerupAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::SwitchInventoryPreviousIndex);
 	}
 	else
 	{
 		UE_LOG(LogTemplateVehicle, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
+

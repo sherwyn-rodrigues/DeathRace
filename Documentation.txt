@@ -48,3 +48,5 @@ Display pwoerUps on hud
 research about whether to store object reference or class reference in the inventory
 ( yes you need object reference. Its better because you have to keep track of the properties of these objects
 and its possible only through object refarence)
+
+Configure input for use, switch and drop powerup

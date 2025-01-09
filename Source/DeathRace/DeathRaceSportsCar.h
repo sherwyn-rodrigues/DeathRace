@@ -48,12 +48,34 @@ public:
 	//seting up input
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
 
+	//function to bind input when next index button is pressed
+	void SwitchInventoryNextIndex();
+
+	//function to bind input when previous button is pressed
+	void SwitchInventoryPreviousIndex();
+
+	//switch index functionality
+	//this function is called through the next and previous switch index functions
+	void SwitchInventoryIndex(bool isFoward);
 
 
 protected:
 
-	/** Steering Action */
+	/** Use Powerup Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* UsePowerupAction;
+
+	/** Drop Powerup Action*/
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* DropPowerAction;
+
+	/** Switch Next Powerup Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* SwitchNextPowerupAction;
+
+	/** Switch Previous Powerup Action*/
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* SwitchPreviousPowerupAction;
+
 
 };

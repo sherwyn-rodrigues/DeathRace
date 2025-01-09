@@ -21,7 +21,6 @@ void ADeathRacePlayerController::BeginPlay()
 	// Spawn HealthBar
 
 
-
 }
 
 void ADeathRacePlayerController::SetupInputComponent()
