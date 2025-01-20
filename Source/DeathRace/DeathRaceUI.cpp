@@ -7,8 +7,10 @@
 
 void UDeathRaceUI::NativeConstruct()
 {
+	Super::NativeConstruct();
 	ADeathRacePawn* PlayerPawn = Cast<ADeathRacePawn>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 	PlayerPawn->OnHealthChanged.AddDynamic(this, &UDeathRaceUI::OnHealthUpdate);
+	
 
 }
 
