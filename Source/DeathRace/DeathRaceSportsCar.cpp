@@ -104,35 +104,40 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 
 void ADeathRaceSportsCar::DropPowerupFromInventory()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Drop"));
 }
 
 
 void ADeathRaceSportsCar::SwitchInventoryNextIndex()
 {
 	SwitchInventoryIndex(true);
+	UE_LOG(LogTemp, Warning, TEXT("Next %d"), Inventory->CurrentIndex);
 }
 
 void ADeathRaceSportsCar::SwitchInventoryPreviousIndex()
 {
 	SwitchInventoryIndex(false);
+	UE_LOG(LogTemp, Warning, TEXT("Previous %d"), Inventory->CurrentIndex);
 }
 
 void ADeathRaceSportsCar::SwitchInventoryIndex(bool isFoward)
 {
 	if (isFoward)
 	{
-		if (Inventory->CurrentIndex++ < 4)
+		if ((Inventory->CurrentIndex + 1) < 4)
 		{
-			Inventory->CurrentIndex = Inventory->CurrentIndex ++;
+			Inventory->CurrentIndex = Inventory->CurrentIndex + 1;
 		}
 	}
 	else
 	{
-		if (Inventory->CurrentIndex-- > 0)
+		if ((Inventory->CurrentIndex - 1) > 0)
 		{
-			Inventory->CurrentIndex = Inventory->CurrentIndex--;
+			Inventory->CurrentIndex = Inventory->CurrentIndex - 1;
 		}
 	}
+	OnInventoryIndexChangedDeligate.Broadcast(Inventory->CurrentIndex);
+	UE_LOG(LogTemp, Warning, TEXT("Broadcast"));
 }
 
 

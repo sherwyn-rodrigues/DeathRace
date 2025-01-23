@@ -8,6 +8,11 @@
 #include "DeathRace/InventorySystem/Inventory.h"
 #include "DeathRaceSportsCar.generated.h"
 
+
+
+// deligate to update UI
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryIndexChangedDeligate, int32, NewIndex);
+
 /**
  *  Sports car wheeled vehicle implementation
  */
@@ -57,6 +62,10 @@ public:
 	//switch index functionality
 	//this function is called through the next and previous switch index functions
 	void SwitchInventoryIndex(bool isFoward);
+
+	// Expose the delegate as a BlueprintAssignable property
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnInventoryIndexChangedDeligate OnInventoryIndexChangedDeligate;
 
 
 protected:
