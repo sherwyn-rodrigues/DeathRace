@@ -86,10 +86,15 @@ ADeathRaceSportsCar::ADeathRaceSportsCar()
 	Inventory = CreateDefaultSubobject<UInventory>(TEXT("Inventory System"));
 }
 
-void ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
+bool ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
 {
 	//Add Picked Powerup To Inventory
-	Inventory->AddPowerupToInventory(Powerup);
+	bool success = Inventory->AddPowerupToInventory(Powerup);
+	if (success)
+	{
+		UpdateUIImages.Broadcast();
+	}
+	return success;
 }
 
 void ADeathRaceSportsCar::UseAndRemovePowerup()
@@ -99,25 +104,25 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 	{
 		powerup->OnPowerupUse();
 		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
+		UpdateUIImages.Broadcast();
 	}
 }
 
 void ADeathRaceSportsCar::DropPowerupFromInventory()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Drop"));
+	UpdateUIImages.Broadcast();
 }
 
 
 void ADeathRaceSportsCar::SwitchInventoryNextIndex()
 {
 	SwitchInventoryIndex(true);
-	UE_LOG(LogTemp, Warning, TEXT("Next %d"), Inventory->CurrentIndex);
 }
 
 void ADeathRaceSportsCar::SwitchInventoryPreviousIndex()
 {
 	SwitchInventoryIndex(false);
-	UE_LOG(LogTemp, Warning, TEXT("Previous %d"), Inventory->CurrentIndex);
 }
 
 void ADeathRaceSportsCar::SwitchInventoryIndex(bool isFoward)
@@ -137,7 +142,6 @@ void ADeathRaceSportsCar::SwitchInventoryIndex(bool isFoward)
 		}
 	}
 	OnInventoryIndexChangedDeligate.Broadcast(Inventory->CurrentIndex);
-	UE_LOG(LogTemp, Warning, TEXT("Broadcast"));
 }
 
 

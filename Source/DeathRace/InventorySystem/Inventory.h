@@ -41,7 +41,7 @@ public:
 
 	// add powerup to inventory after pickup
 	UFUNCTION(BlueprintCallable)
-	void AddPowerupToInventory(ABasePowerup* PowerupClass);
+	bool AddPowerupToInventory(ABasePowerup* PowerupClass);
 
 
 	//Remove from inventory probably after use or after powerup dropped

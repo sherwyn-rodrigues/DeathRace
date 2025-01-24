@@ -24,5 +24,5 @@ class DEATHRACE_API IInventoryInterface
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void AddPowerup(ABasePowerup* Powerup);
+	bool AddPowerup(ABasePowerup* Powerup);
 };

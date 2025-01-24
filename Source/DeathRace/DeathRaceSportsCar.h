@@ -12,6 +12,7 @@
 
 // deligate to update UI
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryIndexChangedDeligate, int32, NewIndex);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpdateUIImages);
 
 /**
  *  Sports car wheeled vehicle implementation
@@ -42,7 +43,7 @@ public:
 	UInventory* Inventory;
 
 	// Inventory Function override
-	void AddPowerup_Implementation(ABasePowerup* Powerup) override;
+	bool AddPowerup_Implementation(ABasePowerup* Powerup) override;
 
 	//Remove from inventory after use
 	void UseAndRemovePowerup();
@@ -66,6 +67,9 @@ public:
 	// Expose the delegate as a BlueprintAssignable property
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnInventoryIndexChangedDeligate OnInventoryIndexChangedDeligate;
+
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FUpdateUIImages UpdateUIImages;
 
 
 protected:

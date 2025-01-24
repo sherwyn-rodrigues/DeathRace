@@ -53,10 +53,13 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 	if (OtherActor->ActorHasTag(FName("Car")))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Its a car"));
-		PowerupPick(OtherActor);
 		if (OtherActor->Implements<UInventoryInterface>())
 		{
-			IInventoryInterface::Execute_AddPowerup(OtherActor, this);
+			bool success = IInventoryInterface::Execute_AddPowerup(OtherActor, this);
+			if(success)
+			{
+				PowerupPick(OtherActor);
+			}
 		}
 	}
 	else

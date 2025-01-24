@@ -30,7 +30,7 @@ void UInventory::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 }
 
 
-void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
+bool UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 {
 	if (!CheckIsInventoryFull() && PowerupClass)// check if inventory is not full
 	{
@@ -38,23 +38,25 @@ void UInventory::AddPowerupToInventory(ABasePowerup* PowerupClass)
 		{
 			InventoryItems.Add(2, PowerupClass);
 			//DisplayInventory();
-			return;
+			return true;
 		}
 
 		if (*InventoryItems.Find(3) == nullptr)// add to the right index of the map
 		{
 			InventoryItems.Add(3, PowerupClass);
 			//DisplayInventory();
-			return;
+			return true;
 		}
 
 		if (*InventoryItems.Find(1) == nullptr)// add to the left index of the map
 		{
 			InventoryItems.Add(1, PowerupClass);
 			//DisplayInventory();
-			return;
+			return true;
 		}
+		return false;
 	}
+	return false;
 }
 
 void UInventory::RemovePowerupFromInventory(int32 RemoveIndex)
