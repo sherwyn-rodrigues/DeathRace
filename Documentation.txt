@@ -51,4 +51,5 @@ and its possible only through object refarence)
 
 Configure input for use, switch and drop powerup (done)
 Check by ui widget event construct is not working (fixed)
-display powerup image in the ui widget (in Progress, issues(Keeps on collecting powerups even when full))
+display powerup image in the ui widget (in Progress, issues(Keeps on collecting powerups even when full))(fixed)
+Drop Powerup Functionality(Done)

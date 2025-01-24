@@ -24,10 +24,10 @@ protected:
 	UFUNCTION()
 	void PowerupPick(AActor* OtherActor);
 
-	UFUNCTION()
-	void OnPowerupDrop();
-
 public:	
+
+	UFUNCTION(BlueprintCallable)
+	void OnPowerupDrop();
 
 	UFUNCTION(BlueprintCallable)
 	void OnPowerupUse();

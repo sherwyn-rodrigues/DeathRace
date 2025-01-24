@@ -110,8 +110,26 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 
 void ADeathRaceSportsCar::DropPowerupFromInventory()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Drop"));
-	UpdateUIImages.Broadcast();
+	ABasePowerup* powerup = Inventory->GetPowerupFromInventory(Inventory->CurrentIndex);
+	if (powerup != nullptr)
+	{
+		powerup->OnPowerupDrop();
+
+		//spawn in the world
+		FVector SpawnLocation = BackSpawnPoint->GetComponentLocation();
+		FRotator SpawnRotation(0.0f, 0.0f, 0.0f);
+
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+		//end spawn 
+
+		GetWorld()->SpawnActor<AActor>(powerup->GetClass(), SpawnLocation, SpawnRotation, SpawnParams);
+
+		//remove from inventory
+		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
+		UpdateUIImages.Broadcast();
+		UE_LOG(LogTemp, Warning, TEXT("Drop"));
+	}
 }
 
 
