@@ -3,3 +3,7 @@
 
 #include "DeathRace/PowerUps/AllPowerups/Repair.h"
 
+void ARepair::OnPowerupUse()
+{
+	Super::OnPowerupUse();
+}

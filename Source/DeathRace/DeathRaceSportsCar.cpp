@@ -103,8 +103,15 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 	if (powerup != nullptr)
 	{
 		powerup->OnPowerupUse();
-		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
-		UpdateUIImages.Broadcast();
+		powerup->PowerupUseCount = powerup->PowerupUseCount - 1;
+
+		if (powerup->PowerupUseCount < 1)
+		{
+			Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
+			UpdateUIImages.Broadcast();
+		}
+		
+		UE_LOG(LogTemp, Warning, TEXT("%d"), powerup->PowerupUseCount);
 	}
 }
 
@@ -113,22 +120,46 @@ void ADeathRaceSportsCar::DropPowerupFromInventory()
 	ABasePowerup* powerup = Inventory->GetPowerupFromInventory(Inventory->CurrentIndex);
 	if (powerup != nullptr)
 	{
-		powerup->OnPowerupDrop();
+		int powerupcount = powerup->OnPowerupDrop();
 
 		//spawn in the world
 		FVector SpawnLocation = BackSpawnPoint->GetComponentLocation();
 		FRotator SpawnRotation(0.0f, 0.0f, 0.0f);
 
 		FActorSpawnParameters SpawnParams;
-		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-		//end spawn 
 
+		ABasePowerup* SpawnedActor = GetWorld()->SpawnActorDeferred<ABasePowerup>(
+			powerup->GetClass(),                       
+			FTransform(SpawnRotation, SpawnLocation),      
+			nullptr,                                       
+			nullptr,                                       
+			ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn
+		);
+
+		if (SpawnedActor)
+		{
+			//change variable before spawning
+			SpawnedActor->PowerupUseCount = powerupcount;
+			//spawn after all alterations
+			SpawnedActor->FinishSpawning(FTransform(SpawnRotation, SpawnLocation));
+		}
+
+
+
+		/*
+		* //using differed spawn actor instead
+		* //using differed so that i can set PowerupUseCount on spawn
 		GetWorld()->SpawnActor<AActor>(powerup->GetClass(), SpawnLocation, SpawnRotation, SpawnParams);
+		*/
 
 		//remove from inventory
 		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
 		UpdateUIImages.Broadcast();
 		UE_LOG(LogTemp, Warning, TEXT("Drop"));
+		
+
+
+
 	}
 }
 

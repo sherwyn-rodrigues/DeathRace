@@ -14,4 +14,9 @@ class DEATHRACE_API ADartbolts : public ABasePowerup
 {
 	GENERATED_BODY()
 	
+
+public:
+	void OnPowerupUse() override;
+
+	ADartbolts();
 };

@@ -3,3 +3,8 @@
 
 #include "DeathRace/PowerUps/AllPowerups/Shield.h"
 
+void AShield::OnPowerupUse()
+{
+
+	Super::OnPowerupUse();
+}

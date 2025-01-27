@@ -85,9 +85,10 @@ void ABasePowerup::PowerupPick(AActor* OtherActor)
 }
 
 
-void ABasePowerup::OnPowerupDrop()
+int ABasePowerup::OnPowerupDrop()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Power Being Dropped"));
+	return PowerupUseCount;
 }
 
 void ABasePowerup::OnPowerupUse()

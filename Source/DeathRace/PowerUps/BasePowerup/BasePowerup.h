@@ -27,10 +27,10 @@ protected:
 public:	
 
 	UFUNCTION(BlueprintCallable)
-	void OnPowerupDrop();
+	int OnPowerupDrop();
 
 	UFUNCTION(BlueprintCallable)
-	void OnPowerupUse();
+	virtual void OnPowerupUse();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -43,6 +43,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDataTableRowHandle RowName; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int PowerupUseCount = 1;
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

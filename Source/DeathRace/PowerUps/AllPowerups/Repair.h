@@ -14,4 +14,6 @@ class DEATHRACE_API ARepair : public ABasePowerup
 {
 	GENERATED_BODY()
 	
+public:
+	void OnPowerupUse() override;
 };

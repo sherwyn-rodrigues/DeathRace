@@ -3,3 +3,8 @@
 
 #include "DeathRace/PowerUps/AllPowerups/Speedboost.h"
 
+void ASpeedboost::OnPowerupUse()
+{
+
+	Super::OnPowerupUse();
+}

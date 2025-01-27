@@ -3,3 +3,8 @@
 
 #include "DeathRace/PowerUps/AllPowerups/Barge.h"
 
+void ABarge::OnPowerupUse()
+{
+
+	Super::OnPowerupUse();
+}

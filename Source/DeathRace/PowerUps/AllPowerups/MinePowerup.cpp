@@ -3,3 +3,8 @@
 
 #include "DeathRace/PowerUps/AllPowerups/MinePowerup.h"
 
+void AMinePowerup::OnPowerupUse()
+{
+
+	Super::OnPowerupUse();
+}

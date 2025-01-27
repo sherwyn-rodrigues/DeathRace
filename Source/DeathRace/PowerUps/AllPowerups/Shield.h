@@ -13,5 +13,8 @@ UCLASS()
 class DEATHRACE_API AShield : public ABasePowerup
 {
 	GENERATED_BODY()
+
+public:
+	void OnPowerupUse() override;
 	
 };

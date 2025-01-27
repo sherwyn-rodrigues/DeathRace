@@ -3,3 +3,7 @@
 
 #include "DeathRace/PowerUps/AllPowerups/Shockwave.h"
 
+void AShockwave::OnPowerupUse()
+{
+	Super::OnPowerupUse();
+}

@@ -14,4 +14,6 @@ class DEATHRACE_API ABarge : public ABasePowerup
 {
 	GENERATED_BODY()
 	
+public:
+	void OnPowerupUse() override;
 };
