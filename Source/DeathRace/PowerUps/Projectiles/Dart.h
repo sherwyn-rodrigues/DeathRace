@@ -13,5 +13,7 @@ UCLASS()
 class DEATHRACE_API ADart : public ABaseProjectile
 {
 	GENERATED_BODY()
-	
+
+public:
+	ADart();
 };

@@ -97,6 +97,21 @@ bool ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
 	return success;
 }
 
+FVector ADeathRaceSportsCar::FrontSpawnPoint_Implementation()
+{
+	return FrontSpawnPoint->GetComponentLocation();
+}
+
+FVector ADeathRaceSportsCar::RearSpawnPoint_Implementation()
+{
+	return BackSpawnPoint->GetComponentLocation();
+}
+
+bool ADeathRaceSportsCar::isFowardAttack_Implementation()
+{
+	return bIsFowardAttack;
+}
+
 void ADeathRaceSportsCar::UseAndRemovePowerup()
 {
 	ABasePowerup* powerup = Inventory->GetPowerupFromInventory(Inventory->CurrentIndex);
@@ -145,7 +160,6 @@ void ADeathRaceSportsCar::DropPowerupFromInventory()
 		}
 
 
-
 		/*
 		* //using differed spawn actor instead
 		* //using differed so that i can set PowerupUseCount on spawn
@@ -156,9 +170,6 @@ void ADeathRaceSportsCar::DropPowerupFromInventory()
 		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
 		UpdateUIImages.Broadcast();
 		UE_LOG(LogTemp, Warning, TEXT("Drop"));
-		
-
-
 
 	}
 }
@@ -193,6 +204,18 @@ void ADeathRaceSportsCar::SwitchInventoryIndex(bool isFoward)
 	OnInventoryIndexChangedDeligate.Broadcast(Inventory->CurrentIndex);
 }
 
+void ADeathRaceSportsCar::FowardAttack()
+{
+	UseAndRemovePowerup();
+	bIsFowardAttack = true;
+}
+
+void ADeathRaceSportsCar::BackwordAttack()
+{
+	UseAndRemovePowerup();
+	bIsFowardAttack = false;
+}
+
 
 //seting up input for use and switch of powerups
 
@@ -202,8 +225,11 @@ void ADeathRaceSportsCar::SetupPlayerInputComponent(class UInputComponent* Playe
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		// Use Powerup
-		EnhancedInputComponent->BindAction(UsePowerupAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::UseAndRemovePowerup);
+		// Use Powerup Front
+		EnhancedInputComponent->BindAction(UsePowerupFrontAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::FowardAttack);
+
+		//Use Powerup Rear 
+		EnhancedInputComponent->BindAction(UsePowerupFrontAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::BackwordAttack);
 
 		//Drop Powerup
 		EnhancedInputComponent->BindAction(DropPowerAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::DropPowerupFromInventory);

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "DeathRacePawn.h"
 #include "DeathRace/Interfaces/InventoryInterface.h"
+#include "DeathRace/Interfaces/CarSpawnPointsInterface.h"
 #include "DeathRace/InventorySystem/Inventory.h"
 #include "DeathRaceSportsCar.generated.h"
 
@@ -18,7 +19,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpdateUIImages);
  *  Sports car wheeled vehicle implementation
  */
 UCLASS(abstract)
-class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn, public IInventoryInterface
+class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn, public IInventoryInterface, public ICarSpawnPointsInterface
 {
 	GENERATED_BODY()
 	
@@ -44,6 +45,15 @@ public:
 
 	// Inventory Function override
 	bool AddPowerup_Implementation(ABasePowerup* Powerup) override;
+
+	//foward spawn point from interface override
+	FVector FrontSpawnPoint_Implementation();
+
+	//backword spawn point from interface override
+	FVector RearSpawnPoint_Implementation();
+
+	bool isFowardAttack_Implementation();
+
 
 	//Remove from inventory after use
 	void UseAndRemovePowerup();
@@ -71,12 +81,19 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FUpdateUIImages UpdateUIImages;
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	bool bIsFowardAttack = true;
+
 
 protected:
 
-	/** Use Powerup Action */
+	/** Use Powerup Front Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* UsePowerupAction;
+	UInputAction* UsePowerupFrontAction;
+
+	/** Use Powerup Rear Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* UsePowerupRearAction;
 
 	/** Drop Powerup Action*/
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -90,5 +107,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* SwitchPreviousPowerupAction;
 
+	void FowardAttack();
+
+	void BackwordAttack();
 
 };
