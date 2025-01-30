@@ -16,4 +16,8 @@ class DEATHRACE_API ADart : public ABaseProjectile
 
 public:
 	ADart();
+
+private:
+	virtual void BeginPlay() override;
+	FTimerHandle TimerHandle;
 };

@@ -6,7 +6,13 @@
 
 ADart::ADart()
 {
-	ProjectileMovement->InitialSpeed = 1000;
-	ProjectileMovement->MaxSpeed = 1000;
+	ProjectileMovement->InitialSpeed = 10000;
+	ProjectileMovement->MaxSpeed = 10000;
 
+}
+
+void ADart::BeginPlay()
+{
+	Super::BeginPlay();
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ADart::DestroySelfActor, 5.0f, false);
 }

@@ -18,11 +18,12 @@ ABaseProjectile::ABaseProjectile()
 
 	//Sphere Collider Setup
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollider"));
-	SphereCollider->InitSphereRadius(100.0f);
+	SphereCollider->InitSphereRadius(60.0f);
 	SphereCollider->SetCollisionProfileName(TEXT("OverlapAll"));
 	SphereCollider->SetEnableGravity(false);
-	SphereCollider->SetSimulatePhysics(true);
+	SphereCollider->SetSimulatePhysics(false);
 	SphereCollider->SetupAttachment(SceneComponent);
+	SphereCollider->SetGenerateOverlapEvents(true);
 
 	//Static Mesh Setup
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
@@ -33,14 +34,30 @@ ABaseProjectile::ABaseProjectile()
 
 	//Setup ProjectileMovement
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
+	ProjectileMovement->ProjectileGravityScale = 0.0f;
 
+	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ABaseProjectile::OnSphereBeginOverlap);
 }
 
 // Called when the game starts or when spawned
 void ABaseProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
+}
+
+void ABaseProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Overlapped"));
+	if (OtherActor && OtherActor != this)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Bolt Destoryed"));
+		DestroySelfActor();
+	}
+}
+
+void ABaseProjectile::DestroySelfActor()
+{
+	Destroy();
 }
 
 // Called every frame

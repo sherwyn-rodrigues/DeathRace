@@ -58,3 +58,4 @@ Note: Image resolution for ui inventory is 240x240
 
 Powerup Spawn After being collected 
 Work on powerup
+Check why AI is not working

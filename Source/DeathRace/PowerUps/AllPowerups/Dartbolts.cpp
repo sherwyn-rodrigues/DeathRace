@@ -18,21 +18,22 @@ void ADartbolts::OnPowerupUse()
 		AActor* OwnerActor = GetOwner();
 		if (OwnerActor && OwnerActor->Implements<UCarSpawnPointsInterface>())
 		{
-			 bool isFowardAttack = ICarSpawnPointsInterface::Execute_isFowardAttack(GetOwner());
+			 bool isFowardAttack = ICarSpawnPointsInterface::Execute_isFowardAttack(OwnerActor);
 			 
 			 if (isFowardAttack)
 			 {
-				 SpawnLocation = ICarSpawnPointsInterface::Execute_FrontSpawnPoint(GetOwner());
+				 SpawnLocation = ICarSpawnPointsInterface::Execute_FrontSpawnPoint(OwnerActor);
 			 }
 			 else
 			 {
-				 SpawnLocation = ICarSpawnPointsInterface::Execute_RearSpawnPoint(GetOwner());
+				 SpawnLocation = ICarSpawnPointsInterface::Execute_RearSpawnPoint(OwnerActor);
 			 }
-		}
+		} 
 
-		FRotator SpawnRotation = FRotator(0,0,0);
+		float roll = OwnerActor->GetActorRotation().Roll;
+		float yaw = OwnerActor->GetActorRotation().Yaw;
+		FRotator SpawnRotation = FRotator(0, yaw, roll);
 		AActor* SpawnedActor = GetWorld()->SpawnActor<ABaseProjectile>(ProjectileToSpawn, SpawnLocation, SpawnRotation);
 		
 	}
 }
-

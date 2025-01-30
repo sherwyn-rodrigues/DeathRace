@@ -125,8 +125,6 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 			Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
 			UpdateUIImages.Broadcast();
 		}
-		
-		UE_LOG(LogTemp, Warning, TEXT("%d"), powerup->PowerupUseCount);
 	}
 }
 
@@ -169,8 +167,6 @@ void ADeathRaceSportsCar::DropPowerupFromInventory()
 		//remove from inventory
 		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
 		UpdateUIImages.Broadcast();
-		UE_LOG(LogTemp, Warning, TEXT("Drop"));
-
 	}
 }
 
@@ -206,14 +202,14 @@ void ADeathRaceSportsCar::SwitchInventoryIndex(bool isFoward)
 
 void ADeathRaceSportsCar::FowardAttack()
 {
-	UseAndRemovePowerup();
 	bIsFowardAttack = true;
+	UseAndRemovePowerup();
 }
 
 void ADeathRaceSportsCar::BackwordAttack()
 {
-	UseAndRemovePowerup();
 	bIsFowardAttack = false;
+	UseAndRemovePowerup();
 }
 
 
@@ -229,7 +225,7 @@ void ADeathRaceSportsCar::SetupPlayerInputComponent(class UInputComponent* Playe
 		EnhancedInputComponent->BindAction(UsePowerupFrontAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::FowardAttack);
 
 		//Use Powerup Rear 
-		EnhancedInputComponent->BindAction(UsePowerupFrontAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::BackwordAttack);
+		EnhancedInputComponent->BindAction(UsePowerupRearAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::BackwordAttack);
 
 		//Drop Powerup
 		EnhancedInputComponent->BindAction(DropPowerAction, ETriggerEvent::Started, this, &ADeathRaceSportsCar::DropPowerupFromInventory);
