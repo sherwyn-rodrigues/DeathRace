@@ -29,6 +29,9 @@ ABasePowerup::ABasePowerup()
 	SphereCollider->SetSimulatePhysics(false);
 	SphereCollider->OnComponentBeginOverlap.AddDynamic(this, &ABasePowerup::OnOverlapBegin);
 
+	//add tags for base powerup
+	Tags.Add(FName("Powerups"));
+
 }
 
 // Called when the game starts or when spawned

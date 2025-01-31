@@ -48,7 +48,7 @@ void ABaseProjectile::BeginPlay()
 void ABaseProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlapped"));
-	if (OtherActor && OtherActor != this)
+	if (OtherActor && OtherActor != this && !(OtherActor->ActorHasTag(FName("Powerups"))))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Bolt Destoryed"));
 		DestroySelfActor();
