@@ -16,5 +16,8 @@ class DEATHRACE_API AMinePowerup : public ABasePowerup
 
 public:
 	void OnPowerupUse() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
+	TSubclassOf<class ABaseProjectile> ProjectileToSpawn;
 	
 };

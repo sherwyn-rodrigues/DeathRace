@@ -2,6 +2,7 @@
 
 
 #include "DeathRace/PowerUps/AllPowerups/Dartbolts.h"
+#include "DeathRace/PowerUps/Projectiles/BaseProjectile.h"
 #include "DeathRace/Interfaces/CarSpawnPointsInterface.h"
 
 ADartbolts::ADartbolts()

@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "DeathRace/PowerUps/BasePowerup/BasePowerup.h"
-#include "DeathRace/PowerUps/Projectiles/BaseProjectile.h"
 #include "Dartbolts.generated.h"
 
 /**
@@ -22,5 +21,5 @@ public:
 	ADartbolts();
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile")
-	TSubclassOf<ABaseProjectile> ProjectileToSpawn;
+	 TSubclassOf<class ABaseProjectile> ProjectileToSpawn;
 };
