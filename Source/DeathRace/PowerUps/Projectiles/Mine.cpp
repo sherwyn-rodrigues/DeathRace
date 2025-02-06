@@ -3,23 +3,24 @@
 
 #include "DeathRace/PowerUps/Projectiles/Mine.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SphereComponent.h"
 
 AMine::AMine()
 {
-	ProjectileMovement->InitialSpeed = 15000.0f;
-	ProjectileMovement->MaxSpeed = 15000.0f;
+	ProjectileMovement->InitialSpeed = 2222.0f;
+	ProjectileMovement->MaxSpeed = 2222.0f;
 }
 
 void AMine::StopProjectileMovement()
 {
-	//ProjectileMovement->InitialSpeed = 10000.0f;
-	//ProjectileMovement->MaxSpeed = 10000.0f;
 	ProjectileMovement->StopMovementImmediately();
+	//StaticMesh->SetSimulatePhysics(true);
 }
 
 void AMine::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorld()->GetTimerManager().SetTimer(TimerHandleDestroy, this, &AMine::DestroySelfActor, 30.0f, false);
-	GetWorld()->GetTimerManager().SetTimer(TimerHandleStopMovement, this, &AMine::StopProjectileMovement, .5f, false);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandleStopMovement, this, &AMine::StopProjectileMovement, .2f, false);
 }

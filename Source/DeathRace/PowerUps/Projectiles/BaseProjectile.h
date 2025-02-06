@@ -37,7 +37,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Component")
 	class USphereComponent* SphereCollider;
 
-	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,  Category = "Component")
 	class UProjectileMovementComponent* ProjectileMovement;
 
 	UPROPERTY(VisibleAnywhere, Category = "Component")

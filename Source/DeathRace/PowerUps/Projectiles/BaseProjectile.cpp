@@ -27,7 +27,7 @@ ABaseProjectile::ABaseProjectile()
 
 	//Static Mesh Setup
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
-	StaticMesh->SetCollisionProfileName(TEXT("OverlapAll"));
+	StaticMesh->SetCollisionProfileName(TEXT("BlockAll"));
 	StaticMesh->SetEnableGravity(false);
 	StaticMesh->SetSimulatePhysics(false);
 	StaticMesh->SetupAttachment(SceneComponent);
@@ -48,9 +48,9 @@ void ABaseProjectile::BeginPlay()
 void ABaseProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlapped"));
-	if (OtherActor && OtherActor != this && !(OtherActor->ActorHasTag(FName("Powerups"))))
+	if (OtherActor && OtherActor != this && OtherActor->ActorHasTag(FName("Car")))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Bolt Destoryed"));
+		UE_LOG(LogTemp, Warning, TEXT("Bolt Destoryed : %s"), *OtherActor->GetName());
 		DestroySelfActor();
 	}
 }
