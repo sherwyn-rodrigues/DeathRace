@@ -40,6 +40,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite,  Category = "Component")
 	class UProjectileMovementComponent* ProjectileMovement;
 
+	/*
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	class USceneComponent* SceneComponent;
+	*/
 };

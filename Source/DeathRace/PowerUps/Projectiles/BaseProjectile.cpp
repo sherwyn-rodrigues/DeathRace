@@ -12,25 +12,21 @@ ABaseProjectile::ABaseProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//SetupRoot
-	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-	RootComponent = SceneComponent;
-
 	//Sphere Collider Setup
 	SphereCollider = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollider"));
 	SphereCollider->InitSphereRadius(60.0f);
 	SphereCollider->SetCollisionProfileName(TEXT("OverlapAll"));
 	SphereCollider->SetEnableGravity(false);
 	SphereCollider->SetSimulatePhysics(false);
-	SphereCollider->SetupAttachment(SceneComponent);
 	SphereCollider->SetGenerateOverlapEvents(true);
+	RootComponent = SphereCollider;
 
 	//Static Mesh Setup
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMesh->SetCollisionProfileName(TEXT("BlockAll"));
 	StaticMesh->SetEnableGravity(false);
 	StaticMesh->SetSimulatePhysics(false);
-	StaticMesh->SetupAttachment(SceneComponent);
+	StaticMesh->SetupAttachment(SphereCollider);
 
 	//Setup ProjectileMovement
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));

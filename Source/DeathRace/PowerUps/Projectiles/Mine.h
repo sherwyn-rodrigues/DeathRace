@@ -19,8 +19,10 @@ private:
 	
 	void StopProjectileMovement();
 
+	void DisableGravityAndPhysics();
+
 	virtual void BeginPlay() override;
 
 	FTimerHandle TimerHandleDestroy;
-	FTimerHandle TimerHandleStopMovement;
+	FTimerHandle TimerHandleForProjectileMovement;
 };

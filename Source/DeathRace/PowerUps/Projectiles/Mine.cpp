@@ -14,13 +14,23 @@ AMine::AMine()
 
 void AMine::StopProjectileMovement()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandleForProjectileMovement);
 	ProjectileMovement->StopMovementImmediately();
+	//StaticMesh->SetEnableGravity(true);
 	//StaticMesh->SetSimulatePhysics(true);
+	//GetWorld()->GetTimerManager().SetTimer(TimerHandleForProjectileMovement, this, &AMine::DisableGravityAndPhysics, 1.0f, false);
+	
+}
+
+void AMine::DisableGravityAndPhysics()
+{
+	StaticMesh->SetEnableGravity(false);
+	StaticMesh->SetSimulatePhysics(false);
 }
 
 void AMine::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorld()->GetTimerManager().SetTimer(TimerHandleDestroy, this, &AMine::DestroySelfActor, 30.0f, false);
-	GetWorld()->GetTimerManager().SetTimer(TimerHandleStopMovement, this, &AMine::StopProjectileMovement, .2f, false);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandleForProjectileMovement, this, &AMine::StopProjectileMovement, .2f, false);
 }
