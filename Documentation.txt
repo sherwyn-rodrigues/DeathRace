@@ -61,3 +61,6 @@ Work on powerup
 Check why AI is not working
 
 NOTE: Always remember to add road spline and torque curve to AI PLayer (Issues arised earleir because of this)
+NOTE: If powerup images arnt not displaying in ui check if the table abd row rane are setup in the powerup blueprint
+
+TODO: ObjectPooling For Projectile Systems

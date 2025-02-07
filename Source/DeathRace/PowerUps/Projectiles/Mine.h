@@ -19,6 +19,10 @@ private:
 	
 	void StopProjectileMovement();
 
+	//enable gaphics and physics after projectile movement stops to simulate gravity
+	void EnableGravityAndPhysics();
+
+	//disable graphics and physics to stop simulating gravity to reduce performance load
 	void DisableGravityAndPhysics();
 
 	virtual void BeginPlay() override;
