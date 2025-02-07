@@ -31,21 +31,18 @@ ABasePowerup::ABasePowerup()
 
 	//add tags for base powerup
 	Tags.Add(FName("Powerups"));
-
 }
 
 // Called when the game starts or when spawned
 void ABasePowerup::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void ABasePowerup::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, 
@@ -55,7 +52,6 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 {
 	if (OtherActor->ActorHasTag(FName("Car")))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Its a car"));
 		if (OtherActor->Implements<UInventoryInterface>())
 		{
 			bool success = IInventoryInterface::Execute_AddPowerup(OtherActor, this);
@@ -67,7 +63,6 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Its not a car"));
 	}
 }
 
@@ -90,11 +85,9 @@ void ABasePowerup::PowerupPick(AActor* OtherActor)
 
 int ABasePowerup::OnPowerupDrop()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Power Being Dropped"));
 	return PowerupUseCount;
 }
 
 void ABasePowerup::OnPowerupUse()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Power Being Used"));
 }

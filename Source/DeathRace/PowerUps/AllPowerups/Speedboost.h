@@ -15,6 +15,19 @@ class DEATHRACE_API ASpeedboost : public ABasePowerup
 	GENERATED_BODY()
 
 public:
+
 	void OnPowerupUse() override;
-	
+
+protected:
+
+	//to check whether should apply boost or not
+	bool bShouldApplyBoost = false;
+
+	// apply force to the vehicle to simulate boost
+	void ApplyBoost();
+
+	void DisableBoost();
+
+	FTimerHandle RetriggerTimerHandle;
+	FTimerHandle ChangeBostTimerHandle;
 };
