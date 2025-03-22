@@ -17,6 +17,10 @@ void ADeathRacePlayerController::BeginPlay()
 	check(VehicleUI);
 
 	VehicleUI->AddToViewport();
+
+	// Spawn HealthBar
+
+
 }
 
 void ADeathRacePlayerController::SetupInputComponent()

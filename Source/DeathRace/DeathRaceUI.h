@@ -30,6 +30,11 @@ public:
 	/** Called to update the gear display */
 	void UpdateGear(int32 NewGear);
 
+	/** Called to update the gear display */
+	UFUNCTION(BlueprintCallable)
+	void UpdateHealth(float HealthToAdd);
+
+
 protected:
 
 	/** Implemented in Blueprint to display the new speed */
@@ -39,4 +44,10 @@ protected:
 	/** Implemented in Blueprint to display the new gear */
 	UFUNCTION(BlueprintImplementableEvent, Category = Vehicle)
 	void OnGearUpdate(int32 NewGear);
+
+	/** Implemented in Blueprint to display the new health */
+	UFUNCTION(BlueprintImplementableEvent, Category = Vehicle)
+	void OnHealthUpdate(float NewHealth);
+
+	virtual void NativeConstruct() override;
 };

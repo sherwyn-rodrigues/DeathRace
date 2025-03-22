@@ -14,6 +14,9 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateVehicle, Log, All);
 
+//declare deligate
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChange, float, HealthUpdate);
+
 /**
  *  Vehicle Pawn class
  *  Handles common functionality for all vehicle types,
@@ -51,9 +54,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* SteeringAction;
 
+	/** Handles Steering Input For AI Cars */
+	void AISteering(float SteerAmount);
+
 	/** Throttle Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* ThrottleAction;
+
+	/** Handles Acceleration inpit for AI Cars */
+	void AIThrottle(float AccelerationAmount);
 
 	/** Brake Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -91,7 +100,23 @@ public:
 
 	virtual void Tick(float Delta) override;
 
+	virtual void BeginPlay() override;
+
 	// End Actor interface
+
+	/** Max Health of the vehicles */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float MaxHealth = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float CurrentHealth = 0;
+
+	//Multicast deligate instance
+	UPROPERTY(BlueprintAssignable)
+	FOnHealthChange OnHealthChanged;
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeHealth(float HealthUpdateValue);
 
 protected:
 

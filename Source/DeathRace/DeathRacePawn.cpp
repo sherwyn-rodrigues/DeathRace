@@ -15,6 +15,8 @@
 
 DEFINE_LOG_CATEGORY(LogTemplateVehicle);
 
+
+
 ADeathRacePawn::ADeathRacePawn()
 {
 	// construct the front camera boom
@@ -51,6 +53,9 @@ ADeathRacePawn::ADeathRacePawn()
 
 	// get the Chaos Wheeled movement component
 	ChaosVehicleMovement = CastChecked<UChaosWheeledVehicleMovementComponent>(GetVehicleMovement());
+
+	// add tag for collision checking done is BasePowerup
+	Tags.Add(FName("Car"));
 
 }
 
@@ -107,6 +112,22 @@ void ADeathRacePawn::Tick(float Delta)
 	BackSpringArm->SetRelativeRotation(FRotator(0.0f, CameraYaw, 0.0f));
 }
 
+void ADeathRacePawn::BeginPlay()
+{
+	Super::BeginPlay();
+	ChangeHealth(MaxHealth);
+}
+
+void ADeathRacePawn::ChangeHealth(float HealthUpdateValue)
+{
+	if (CurrentHealth + HealthUpdateValue < MaxHealth && CurrentHealth + HealthUpdateValue > 0)
+	{
+		CurrentHealth = +HealthUpdateValue;
+		UE_LOG(LogTemp, Warning, TEXT("%f"), CurrentHealth);
+		OnHealthChanged.Broadcast(CurrentHealth);
+	}
+}
+
 void ADeathRacePawn::Steering(const FInputActionValue& Value)
 {
 	// get the input magnitude for steering
@@ -115,6 +136,22 @@ void ADeathRacePawn::Steering(const FInputActionValue& Value)
 	// add the input
 	ChaosVehicleMovement->SetSteeringInput(SteeringValue);
 }
+
+//AI steering
+void ADeathRacePawn::AISteering(float SteerAmount)
+{
+	// Steering for AI Car
+	ChaosVehicleMovement->SetSteeringInput(SteerAmount);
+}
+
+
+//AI Throtle
+void ADeathRacePawn::AIThrottle(float AccelerationAmount)
+{
+	// Throttle for AI Car
+	ChaosVehicleMovement->SetThrottleInput(AccelerationAmount);
+}
+
 
 void ADeathRacePawn::Throttle(const FInputActionValue& Value)
 {

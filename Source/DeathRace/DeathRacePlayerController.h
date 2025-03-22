@@ -35,6 +35,14 @@ protected:
 	/** Pointer to the UI widget */
 	TObjectPtr<UDeathRaceUI> VehicleUI;
 
+
+
+	/** HealthBar UI to spawn */
+
+
+	/** pointer to the healthbar*/
+
+
 	// Begin Actor interface
 protected:
 
