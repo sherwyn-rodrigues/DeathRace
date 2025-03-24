@@ -30,4 +30,9 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable) 
 	bool isFowardAttack();
+
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	USkeletalMeshComponent* GetSkeletalMesh();
+
 };

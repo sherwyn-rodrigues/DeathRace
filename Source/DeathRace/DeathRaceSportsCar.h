@@ -51,8 +51,12 @@ public:
 
 	//backword spawn point from interface override
 	FVector RearSpawnPoint_Implementation();
-
+	
+	//is foward attack bool from interface override
 	bool isFowardAttack_Implementation();
+
+	//return skeletal mesh interface override
+	USkeletalMeshComponent* GetSkeletalMesh();
 
 
 	//Remove from inventory after use

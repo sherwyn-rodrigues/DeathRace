@@ -5,6 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+//#include "GameFramework/"
 
 // Sets default values
 ABaseProjectile::ABaseProjectile()
@@ -43,11 +44,11 @@ void ABaseProjectile::BeginPlay()
 
 void ABaseProjectile::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Overlapped"));
 	if (OtherActor && OtherActor != this && OtherActor->ActorHasTag(FName("Car")))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Bolt Destoryed : %s"), *OtherActor->GetName());
-		DestroySelfActor();
+		ActorToApplyForce = OtherActor;
+		ProjectileEffect();
+		//DestroySelfActor();
 	}
 }
 
@@ -55,6 +56,12 @@ void ABaseProjectile::DestroySelfActor()
 {
 	Destroy();
 }
+
+void ABaseProjectile::ProjectileEffect()
+{
+
+}
+
 
 // Called every frame
 void ABaseProjectile::Tick(float DeltaTime)

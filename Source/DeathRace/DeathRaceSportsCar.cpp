@@ -97,6 +97,7 @@ bool ADeathRaceSportsCar::AddPowerup_Implementation(ABasePowerup* Powerup)
 	return success;
 }
 
+//interfaces
 FVector ADeathRaceSportsCar::FrontSpawnPoint_Implementation()
 {
 	return FrontSpawnPoint->GetComponentLocation();
@@ -111,7 +112,12 @@ bool ADeathRaceSportsCar::isFowardAttack_Implementation()
 {
 	return bIsFowardAttack;
 }
+USkeletalMeshComponent* ADeathRaceSportsCar::GetSkeletalMesh()
+{
+	 return GetMesh();
+}
 
+// interfaces end
 void ADeathRaceSportsCar::UseAndRemovePowerup()
 {
 	ABasePowerup* powerup = Inventory->GetPowerupFromInventory(Inventory->CurrentIndex);
