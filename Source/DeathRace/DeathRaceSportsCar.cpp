@@ -112,7 +112,7 @@ bool ADeathRaceSportsCar::isFowardAttack_Implementation()
 {
 	return bIsFowardAttack;
 }
-USkeletalMeshComponent* ADeathRaceSportsCar::GetSkeletalMesh()
+USkeletalMeshComponent* ADeathRaceSportsCar::GetSkeletalMesh_Implementation()
 {
 	 return GetMesh();
 }

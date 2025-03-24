@@ -56,7 +56,7 @@ public:
 	bool isFowardAttack_Implementation();
 
 	//return skeletal mesh interface override
-	USkeletalMeshComponent* GetSkeletalMesh();
+	USkeletalMeshComponent* GetSkeletalMesh_Implementation();
 
 
 	//Remove from inventory after use

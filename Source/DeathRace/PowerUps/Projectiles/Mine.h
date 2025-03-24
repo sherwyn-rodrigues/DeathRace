@@ -37,5 +37,4 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Projectile");
 	int ImpulseMultiplier = 1000000;
-
 };

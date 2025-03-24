@@ -50,7 +50,7 @@ void AMine::ProjectileEffect()
 	Super::ProjectileEffect();
 	if (ActorToApplyForce)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%s"), *ActorToApplyForce->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("%s"), *ActorToApplyForce->GetName());
 		//->AddImpulse(FVector(0,0,1)*ImpulseMultiplier);
 		if (ActorToApplyForce->Implements<UCarSpawnPointsInterface>())
 		{
@@ -58,8 +58,9 @@ void AMine::ProjectileEffect()
 			USkeletalMeshComponent* Mesh = ICarSpawnPointsInterface::Execute_GetSkeletalMesh(ActorToApplyForce);
 			if (Mesh != nullptr)
 			{
-				Mesh->AddImpulse(FVector(0, 0, 1) * ImpulseMultiplier);
+				Mesh->AddImpulse(FVector(0, 0, 1000000));
 			}
+			DestroySelfActor();
 		}
 	}
 }
