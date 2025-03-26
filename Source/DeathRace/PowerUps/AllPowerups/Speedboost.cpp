@@ -21,7 +21,7 @@ void ASpeedboost::ApplyBoost()
 		if (MeshComp)
 		{
 			FVector FowardVector = MeshComp->GetForwardVector();
-			FVector ForceVector = FVector(FowardVector.X * 4000.0f, FowardVector.Y * 4000.0f, FowardVector.Z);
+			FVector ForceVector = FVector(FowardVector.X * 500.0f, FowardVector.Y * 500.0f, FowardVector.Z);
 			MeshComp->AddForce(ForceVector, NAME_None, true);	
 		}
 	}
