@@ -26,6 +26,11 @@ protected:
 	UFUNCTION()
 	void DestroySelfActor();
 
+	UFUNCTION(BlueprintCallable)
+	virtual void ProjectileEffect();
+
+	AActor* ActorToApplyForce;
+
 
 public:	
 	// Called every frame

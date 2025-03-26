@@ -5,6 +5,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
+#include "DeathRace/Interfaces/CarSpawnPointsInterface.h"
 
 AMine::AMine()
 {
@@ -33,7 +34,7 @@ void AMine::EnableGravityAndPhysics()
 void AMine::DisableGravityAndPhysics()
 {
 	StaticMesh->SetEnableGravity(false );
-	StaticMesh->SetSimulatePhysics(false);
+	//StaticMesh->SetSimulatePhysics(false);
 	GetWorldTimerManager().ClearTimer(TimerHandleForProjectileMovement);
 }
 
@@ -42,4 +43,24 @@ void AMine::BeginPlay()
 	Super::BeginPlay();
 	GetWorldTimerManager().SetTimer(TimerHandleDestroy, this, &AMine::DestroySelfActor, 20.0f, false);
 	GetWorldTimerManager().SetTimer(TimerHandleForProjectileMovement, this, &AMine::StopProjectileMovement, .4f, false);
+}
+
+void AMine::ProjectileEffect()
+{
+	Super::ProjectileEffect();
+	if (ActorToApplyForce)
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("%s"), *ActorToApplyForce->GetName());
+		//->AddImpulse(FVector(0,0,1)*ImpulseMultiplier);
+		if (ActorToApplyForce->Implements<UCarSpawnPointsInterface>())
+		{
+			UE_LOG(LogTemp, Warning, TEXT("child class override")); 
+			USkeletalMeshComponent* Mesh = ICarSpawnPointsInterface::Execute_GetSkeletalMesh(ActorToApplyForce);
+			if (Mesh != nullptr)
+			{
+				Mesh->AddAngularImpulseInDegrees(FVector(0, 0, 1) * ImpulseMultiplier, NAME_None, true);
+			}
+			DestroySelfActor();
+		}
+	}
 }

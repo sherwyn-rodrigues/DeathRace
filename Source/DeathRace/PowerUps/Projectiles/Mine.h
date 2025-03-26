@@ -29,4 +29,12 @@ private:
 
 	FTimerHandle TimerHandleDestroy;
 	FTimerHandle TimerHandleForProjectileMovement;
+
+
+protected:
+
+	virtual void ProjectileEffect() override;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Projectile");
+	int ImpulseMultiplier = 1000000;
 };
