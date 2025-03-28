@@ -28,6 +28,11 @@ protected:
 
 	void DisableBoost();
 
+	//trigger zoom start and end whe powerup is used and finished respectively
+	void TriggerStartZoom();
+	void TriggerEndZoom();
+
 	FTimerHandle RetriggerTimerHandle;
-	FTimerHandle ChangeBostTimerHandle;
+	FTimerHandle DisableBostTimerHandle;
+	FTimerHandle TriggerZoomTimerHandle;
 };

@@ -66,6 +66,11 @@ void ABasePowerup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent,
 	}
 }
 
+void ABasePowerup::DeleteSelfPowerupActor()
+{
+	Destroy();
+}
+
 //Powerup pick function
 void ABasePowerup::PowerupPick(AActor* OtherActor)
 {

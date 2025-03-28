@@ -4,13 +4,15 @@
 #include "DeathRace/PowerUps/AllPowerups/Speedboost.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "DeathRace/Interfaces/PlayerCharacterInterface.h"
 
 void ASpeedboost::OnPowerupUse()
 {
 	Super::OnPowerupUse();
 	bShouldApplyBoost = true;
 	GetWorldTimerManager().SetTimer(RetriggerTimerHandle, this, &ASpeedboost::ApplyBoost, 0.01f, true);
-	GetWorldTimerManager().SetTimer(ChangeBostTimerHandle, this, &ASpeedboost::DisableBoost, 1.5f, false);
+	GetWorldTimerManager().SetTimer(TriggerZoomTimerHandle, this, &ASpeedboost::TriggerStartZoom, 0.01f, false);
+	GetWorldTimerManager().SetTimer(DisableBostTimerHandle, this, &ASpeedboost::DisableBoost, 1.5f, false);
 }
 
 void ASpeedboost::ApplyBoost()
@@ -34,4 +36,19 @@ void ASpeedboost::ApplyBoost()
 void ASpeedboost::DisableBoost()
 {
 	bShouldApplyBoost = false;
+	GetWorldTimerManager().ClearTimer(DisableBostTimerHandle);
+	TriggerEndZoom();
+}
+
+void ASpeedboost::TriggerStartZoom()
+{
+	AActor* CurrentOwner = GetOwner();
+	if (CurrentOwner->Implements<UPlayerCharacterInterface>())
+	{
+		IPlayerCharacterInterface::Execute_TriggerCameraZoom(CurrentOwner, true);
+	}	
+}
+
+void ASpeedboost::TriggerEndZoom()
+{
 }

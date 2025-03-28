@@ -64,3 +64,16 @@ NOTE: Always remember to add road spline and torque curve to AI PLayer (Issues a
 NOTE: If powerup images arnt not displaying in ui check if the table abd row rane are setup in the powerup blueprint
 
 TODO: ObjectPooling For Projectile Systems
+
+
+<<<<<<IMPORTANT>>>>>>>>
+NOTE: Need to destroy powerup object ref after being used or dropped(its still attached to the sports car)
+<<<<<<IMPORTANT DONT FORGET>>>>>>>>
+
+
+
+TODO: add zoom in effect function on the sports car and then call in on the powerup using interface
+	that interface is added to DeathRaceSportsCar c++ and overridden in the blueprint 
+	this interface takes a bool input and triggers either zoom in or zoom out functions respectively
+	create function that triggers this start zoom when boost powerup used
+	create another function to zoom end when boost powerup is ended

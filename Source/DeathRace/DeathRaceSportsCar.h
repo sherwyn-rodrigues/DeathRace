@@ -7,8 +7,8 @@
 #include "DeathRace/Interfaces/InventoryInterface.h"
 #include "DeathRace/Interfaces/CarSpawnPointsInterface.h"
 #include "DeathRace/InventorySystem/Inventory.h"
+#include "DeathRace/Interfaces/PlayerCharacterInterface.h"
 #include "DeathRaceSportsCar.generated.h"
-
 
 
 // deligate to update UI
@@ -19,7 +19,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpdateUIImages);
  *  Sports car wheeled vehicle implementation
  */
 UCLASS(abstract)
-class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn, public IInventoryInterface, public ICarSpawnPointsInterface
+class DEATHRACE_API ADeathRaceSportsCar : public ADeathRacePawn, public IInventoryInterface, public ICarSpawnPointsInterface, public IPlayerCharacterInterface
 {
 	GENERATED_BODY()
 	
