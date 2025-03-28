@@ -51,4 +51,10 @@ void ASpeedboost::TriggerStartZoom()
 
 void ASpeedboost::TriggerEndZoom()
 {
+	AActor* CurrentOwner = GetOwner();
+	if (CurrentOwner->Implements<UPlayerCharacterInterface>())
+	{
+		IPlayerCharacterInterface::Execute_TriggerCameraZoom(CurrentOwner, false);
+	}
+	DeleteSelfPowerupActor();
 }
