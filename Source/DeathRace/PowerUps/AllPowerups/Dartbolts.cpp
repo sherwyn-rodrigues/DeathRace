@@ -12,7 +12,7 @@ ADartbolts::ADartbolts()
 
 void ADartbolts::OnPowerupUse()
 {
-	//Super::OnPowerupUse();
+	Super::OnPowerupUse();
 	if (ProjectileToSpawn)
 	{
 		FVector SpawnLocation;
@@ -35,6 +35,10 @@ void ADartbolts::OnPowerupUse()
 		float yaw = OwnerActor->GetActorRotation().Yaw;
 		FRotator SpawnRotation = FRotator(0, yaw, roll);
 		AActor* SpawnedActor = GetWorld()->SpawnActor<ABaseProjectile>(ProjectileToSpawn, SpawnLocation, SpawnRotation);
-		
+
+		if (PowerupUseCount < 1)
+		{
+			DeleteSelfPowerupActor();
+		}
 	}
 }

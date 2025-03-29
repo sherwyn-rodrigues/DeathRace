@@ -124,7 +124,7 @@ void ADeathRaceSportsCar::UseAndRemovePowerup()
 	if (powerup != nullptr)
 	{
 		powerup->OnPowerupUse();
-		powerup->PowerupUseCount = powerup->PowerupUseCount - 1;
+		//powerup->PowerupUseCount = powerup->PowerupUseCount - 1;
 
 		if (powerup->PowerupUseCount < 1)
 		{
@@ -173,6 +173,8 @@ void ADeathRaceSportsCar::DropPowerupFromInventory()
 		//remove from inventory
 		Inventory->RemovePowerupFromInventory(Inventory->CurrentIndex);
 		UpdateUIImages.Broadcast();
+		//delete attached actor
+		powerup->DeleteSelfPowerupActor();
 	}
 }
 

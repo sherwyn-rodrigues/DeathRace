@@ -17,7 +17,13 @@ class DEATHRACE_API ADart : public ABaseProjectile
 public:
 	ADart();
 
+protected:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Projectile");
+	int DartImpulseMultiplier = 1000;
+
 private:
 	virtual void BeginPlay() override;
 	FTimerHandle TimerHandle;
+
+	virtual void ProjectileEffect() override;
 };

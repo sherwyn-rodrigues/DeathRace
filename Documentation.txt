@@ -77,3 +77,4 @@ TODO: add zoom in effect function on the sports car and then call in on the powe
 	this interface takes a bool input and triggers either zoom in or zoom out functions respectively
 	create function that triggers this start zoom when boost powerup used
 	create another function to zoom end when boost powerup is ended
+	Dont forget to delete powerup actor attached to character after drop powerup too

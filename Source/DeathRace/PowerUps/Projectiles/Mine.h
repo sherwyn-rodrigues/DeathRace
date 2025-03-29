@@ -36,5 +36,5 @@ protected:
 	virtual void ProjectileEffect() override;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Projectile");
-	int ImpulseMultiplier = 1000000;
+	int MineImpulseMultiplier = 1000000;
 };

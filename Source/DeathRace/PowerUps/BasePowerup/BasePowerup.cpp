@@ -95,4 +95,5 @@ int ABasePowerup::OnPowerupDrop()
 
 void ABasePowerup::OnPowerupUse()
 {
+	PowerupUseCount--;
 }

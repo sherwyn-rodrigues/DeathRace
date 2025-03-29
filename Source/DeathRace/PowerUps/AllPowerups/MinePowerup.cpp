@@ -8,7 +8,6 @@
 void AMinePowerup::OnPowerupUse()
 {
 	Super::OnPowerupUse();
-
 	if (ProjectileToSpawn)
 	{
 		FVector SpawnLocation;
@@ -31,6 +30,7 @@ void AMinePowerup::OnPowerupUse()
 		float yaw = OwnerActor->GetActorRotation().Yaw;
 		FRotator SpawnRotation = FRotator(0, yaw, roll);
 		AActor* SpawnedActor = GetWorld()->SpawnActor<ABaseProjectile>(ProjectileToSpawn, SpawnLocation, SpawnRotation);
+		DeleteSelfPowerupActor();
 
 	}
 }

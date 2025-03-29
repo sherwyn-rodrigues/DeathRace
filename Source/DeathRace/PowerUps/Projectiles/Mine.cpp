@@ -50,15 +50,12 @@ void AMine::ProjectileEffect()
 	Super::ProjectileEffect();
 	if (ActorToApplyForce)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("%s"), *ActorToApplyForce->GetName());
-		//->AddImpulse(FVector(0,0,1)*ImpulseMultiplier);
 		if (ActorToApplyForce->Implements<UCarSpawnPointsInterface>())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("child class override")); 
 			USkeletalMeshComponent* Mesh = ICarSpawnPointsInterface::Execute_GetSkeletalMesh(ActorToApplyForce);
 			if (Mesh != nullptr)
 			{
-				Mesh->AddAngularImpulseInDegrees(FVector(0, 0, 1) * ImpulseMultiplier, NAME_None, true);
+				Mesh->AddAngularImpulseInDegrees(FVector(0, 0, 1) * MineImpulseMultiplier, NAME_None, true);
 			}
 			DestroySelfActor();
 		}
